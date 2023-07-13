@@ -1,0 +1,24 @@
+{
+  "template": "https://github.com/monarch-initiative/monarch-project-template.git",
+  "commit": "399a879d5a6ae46e4045fc997a750c7b1aaa6543",
+  "checkout": null,
+  "context": {
+    "cookiecutter": {
+      "project_name": "umls-ingest",
+      "github_org_name": "monarch-initiative",
+      "__project_slug": "umls_ingest",
+      "project_description": "UMLS ingest to generate mappings.",
+      "min_python_version": "3.9",
+      "file_name": "main",
+      "greeting_recipient": "World",
+      "full_name": "Harshad Hegde",
+      "email": "hhegde@lbl.gov",
+      "__author": "Harshad Hegde <hhegde@lbl.gov>",
+      "license": "MIT",
+      "github_token_for_doc_deployment": "GH_TOKEN",
+      "github_token_for_pypi_deployment": "PYPI_TOKEN",
+      "_template": "https://github.com/monarch-initiative/monarch-project-template.git"
+    }
+  },
+  "directory": null
+}

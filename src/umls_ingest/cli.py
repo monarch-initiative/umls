@@ -4,7 +4,7 @@ import logging
 import click
 
 from umls_ingest import __version__
-from umls_ingest.main import demo
+from umls_ingest.main import download, mappings
 
 __all__ = [
     "main",
@@ -33,10 +33,17 @@ def main(verbose: int, quiet: bool):
         logger.setLevel(level=logging.ERROR)
 
 
-@main.command()
-def run():
+@click.option("--umls-version", help="UMLS version to download.")
+@main.command("get-tsv")
+def get_tsv(umls_version: str):
     """Run the umls-ingest's demo command."""
-    demo()
+    download(version=umls_version)
+
+
+@main.command("get-mappings")
+def get_mappings():
+    """Run mappings."""
+    mappings()
 
 
 if __name__ == "__main__":

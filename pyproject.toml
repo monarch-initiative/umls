@@ -10,10 +10,14 @@ readme = "README.md"
 python = "^3.9"
 click = "*"
 importlib-metadata = "^4.8.0"
+umls-downloader = "^0.1.1"
+bioversions = "^0.5.192"
+pandas = "^2.0.3"
 
 [tool.poetry.group.dev.dependencies]
 pytest = {version = ">=7.1.2"}
 tox = {version = ">=3.25.1"}
+notebook = "^6.5.4"
 
 [tool.poetry.group.docs]
 optional = true
@@ -26,7 +30,7 @@ sphinx-click = {version = ">=4.3.0"}
 myst-parser = {version = ">=0.18.1"}
 
 [tool.poetry.scripts]
-umls-ingest = "umls_ingest.cli:main"
+umls = "umls_ingest.cli:main"
 
 [tool.poetry-dynamic-versioning]
 enable = true
@@ -42,6 +46,8 @@ extend-ignore = [
     "D211",  # `no-blank-line-before-class`
     "D213",  # `multi-line-summary-second-line`
     ]
+
+line-length = 100
 
 # Allow autofix for all enabled rules (when `--fix`) is provided.
 fixable = ["ALL"]

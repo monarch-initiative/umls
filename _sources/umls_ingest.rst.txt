@@ -1,0 +1,37 @@
+umls\_ingest package
+====================
+
+Submodules
+----------
+
+umls\_ingest.cli module
+-----------------------
+
+.. automodule:: umls_ingest.cli
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+umls\_ingest.constants module
+-----------------------------
+
+.. automodule:: umls_ingest.constants
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+umls\_ingest.main module
+------------------------
+
+.. automodule:: umls_ingest.main
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: umls_ingest
+   :members:
+   :undoc-members:
+   :show-inheritance:

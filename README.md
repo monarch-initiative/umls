@@ -6,7 +6,7 @@ UMLS ingest to generate mappings.
 
 ```
 git clone https://github.com/monarch-initiative/umls-ingest.git
-
+cd umls-ingest
 make mappings
 ```
 This should kickstart the process of an SSSOM tsv generation named `umls.sssom.tsv`.

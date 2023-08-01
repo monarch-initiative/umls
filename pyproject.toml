@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "umls-ingest"
-version = "0.0.0"
+version = "0.0.0.post8.dev0+465d412"
 description = "umls-ingest"
 authors = ["Harshad Hegde <hhegde@lbl.gov>"]
 license = "MIT"
@@ -10,9 +10,8 @@ readme = "README.md"
 python = "^3.9"
 click = "*"
 importlib-metadata = "^4.8.0"
-umls-downloader = "^0.1.1"
-bioversions = "^0.5.192"
-pandas = "^2.0.3"
+pyobo=">=0.9.1"
+
 
 [tool.poetry.group.dev.dependencies]
 pytest = {version = ">=7.1.2"}
@@ -33,7 +32,7 @@ myst-parser = {version = ">=0.18.1"}
 umls = "umls_ingest.cli:main"
 
 [tool.poetry-dynamic-versioning]
-enable = true
+enable = false
 vcs = "git"
 style = "pep440"
 

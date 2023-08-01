@@ -3,7 +3,7 @@
 from pathlib import Path
 from typing import Optional
 from zipfile import ZipFile
-
+import pyobo
 from umls_downloader import download_tgt_versioned
 
 from umls_ingest.constants import API_KEY, MRCONSO_COLUMN_HEADERS, DATA_DIR, MRMAP_COLUMN_NAMES, UMLS_URL
@@ -57,14 +57,15 @@ def _open_file_from_zip(path: Path, fn: str):
             yield file
 
 
-def mappings():
+def mappings(resource: str, output_file: str):
     """
     Map to other ontologies.
 
     Mapping diagram:
         https://www.nlm.nih.gov/research/umls/implementation_resources/query_diagrams/er9.html
     """
-    pass
+    df = pyobo.get_sssom_df(resource)
+    df.to_csv(output_file, sep="\t", index=False)
 
 
 if __name__ == "__main__":

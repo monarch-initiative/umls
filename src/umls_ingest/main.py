@@ -65,7 +65,8 @@ def _open_file_from_zip(path: Path, fn: str):
 
 
 def mappings(resource: str, output_file: str):
-    """Map to other ontologies.
+    """
+    Map to other ontologies.
 
     Mapping diagram:
         https://www.nlm.nih.gov/research/umls/implementation_resources/query_diagrams/er9.html

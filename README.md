@@ -5,7 +5,7 @@ UMLS ingest to generate mappings.
 # Setup
 This repository uses [`pyobo`](https://github.com/pyobo/pyobo) as the core dependency to function.
 
-## Get a ICD API token
+## Get ICD API token
 [Registration](https://icd.who.int/icdapi/Account/Register) with ICD is needed to secure an API token that facilitates gaining access to resources. Save the API client ID and secret as environment variables in `~/bash_profile` or your preferred location.
 
 ```

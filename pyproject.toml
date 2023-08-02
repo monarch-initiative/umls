@@ -17,6 +17,7 @@ pyobo=">=0.9.1"
 pytest = {version = ">=7.1.2"}
 tox = {version = ">=3.25.1"}
 notebook = "^6.5.4"
+pre-commit = {version = ">=3.3.3"}
 
 [tool.poetry.group.docs]
 optional = true
@@ -37,16 +38,16 @@ vcs = "git"
 style = "pep440"
 
 [tool.black]
-line-length = 100
+line-length = 120
 target-version = ["py38", "py39", "py310"]
 
 [tool.ruff]
 extend-ignore = [
     "D211",  # `no-blank-line-before-class`
-    "D213",  # `multi-line-summary-second-line`
+    "D212",  # `multi-line-summary-first-line`
     ]
+line-length = 120
 
-line-length = 100
 
 # Allow autofix for all enabled rules (when `--fix`) is provided.
 fixable = ["ALL"]

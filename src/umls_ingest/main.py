@@ -4,6 +4,7 @@ import logging
 from pathlib import Path
 from typing import Optional, Tuple
 from zipfile import ZipFile
+
 import pandas as pd
 import pyobo
 from umls_downloader import download_tgt_versioned
@@ -97,7 +98,9 @@ def mappings(
         new_outfile = MAPPINGS_DIR.joinpath("_".join(subject_prefixes + object_prefixes) + "." + output_file)
 
     if common_rows is not None:
-        import pdb; pdb.set_trace()
+        import pdb
+
+        pdb.set_trace()
         common_rows.to_csv(new_outfile, sep="\t", index=False)
     else:
         if subject_prefixes:
@@ -106,8 +109,6 @@ def mappings(
             df_object_subset.to_csv(new_outfile, sep="\t", index=False)
         else:
             logging.warning(f"Exported full mappings file at {output_file}")
-
-    
 
 
 if __name__ == "__main__":

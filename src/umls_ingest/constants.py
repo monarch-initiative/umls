@@ -17,6 +17,12 @@ UMLS_URL = BASE_URL + UMLS_SUFFIX
 
 PACKAGE_DIR = Path(__file__).resolve().parent
 DATA_DIR = PACKAGE_DIR / "data"
+MAPPINGS_DIR = PACKAGE_DIR / "mappings"
+
+SUBJECT_ID = "subject_id"
+OBJECT_ID = "object_id"
+PREDICATE_ID = "predicate_id"
+MAPPING_JUSTIFICATION = "mapping_justification"
 
 MRCONSO_COLUMN_HEADERS = [
     "CUI",  # Unique identifier for concept

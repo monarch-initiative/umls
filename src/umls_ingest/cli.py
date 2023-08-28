@@ -1,5 +1,6 @@
 """Command line interface for umls-ingest."""
 import logging
+from typing import Tuple
 
 import click
 
@@ -43,11 +44,19 @@ def get_tsv(umls_version: str):
 
 @main.command("get-mappings")
 @click.option("--resource", help="UMLS is the default resource.", default="umls")
-@click.option("--output", help="Output file name.", default="output.tsv")
 @click.option("--names", help="Get labels for CURIEs.", default=False)
-def get_mappings(resource: str, output: str, names: bool):
+@click.option("--subject-prefixes", help="Prefix of subject CURIEs.", multiple=True)
+@click.option("--object-prefixes", help="Prefix of object CURIEs.", multiple=True)
+@click.option("--output", help="Output file name.")
+def get_mappings(resource: str, names: bool, subject_prefixes: Tuple[str], object_prefixes: Tuple[str], output: str):
     """Run mappings."""
-    mappings(resource, output, names)
+    mappings(
+        resource=resource,
+        output_file=output,
+        names=names,
+        subject_prefixes=subject_prefixes,
+        object_prefixes=object_prefixes,
+    )
 
 
 if __name__ == "__main__":

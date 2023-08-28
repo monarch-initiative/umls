@@ -71,7 +71,7 @@ def mappings(resource: str, output_file: str):
     Mapping diagram:
         https://www.nlm.nih.gov/research/umls/implementation_resources/query_diagrams/er9.html
     """
-    df = pyobo.get_sssom_df(resource)
+    df = pyobo.get_sssom_df(resource, names=False)
     df.to_csv(output_file, sep="\t", index=False)
 
 

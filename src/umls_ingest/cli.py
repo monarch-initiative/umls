@@ -44,9 +44,10 @@ def get_tsv(umls_version: str):
 @main.command("get-mappings")
 @click.option("--resource", help="UMLS is the default resource.", default="umls")
 @click.option("--output", help="Output file name.", default="output.tsv")
-def get_mappings(resource: str, output: str):
+@click.option("--names", help="Get labels for CURIEs.", default=False)
+def get_mappings(resource: str, output: str, names: bool):
     """Run mappings."""
-    mappings(resource, output)
+    mappings(resource, output, names)
 
 
 if __name__ == "__main__":

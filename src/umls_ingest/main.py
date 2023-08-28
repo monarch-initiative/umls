@@ -64,14 +64,14 @@ def _open_file_from_zip(path: Path, fn: str):
             yield file
 
 
-def mappings(resource: str, output_file: str):
+def mappings(resource: str, output_file: str, names: bool):
     """
     Map to other ontologies.
 
     Mapping diagram:
         https://www.nlm.nih.gov/research/umls/implementation_resources/query_diagrams/er9.html
     """
-    df = pyobo.get_sssom_df(resource, names=False)
+    df = pyobo.get_sssom_df(resource, names=names)
     df.to_csv(output_file, sep="\t", index=False)
 
 

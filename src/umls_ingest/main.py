@@ -98,9 +98,6 @@ def mappings(
         new_outfile = MAPPINGS_DIR.joinpath("_".join(subject_prefixes + object_prefixes) + "." + output_file)
 
     if common_rows is not None:
-        import pdb
-
-        pdb.set_trace()
         common_rows.to_csv(new_outfile, sep="\t", index=False)
     else:
         if subject_prefixes:

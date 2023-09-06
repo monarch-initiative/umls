@@ -59,14 +59,13 @@ def get_mappings(resource: str, names: bool, subject_prefixes: Tuple[str], objec
         object_prefixes=object_prefixes,
     )
 
+
 @main.command("get-x-mappings")
 @click.option("--object-prefixes", help="Prefix of subject CURIEs.", multiple=True)
 @click.option("--names", help="Get labels for CURIEs.", default=False)
 def get_x_mappings(object_prefixes: Tuple[str], names: bool):
     """Get non-umls mappings."""
-    x_mappings(
-        object_prefixes=object_prefixes, names=names
-    )
+    x_mappings(object_prefixes=object_prefixes, names=names)
 
 
 if __name__ == "__main__":

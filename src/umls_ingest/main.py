@@ -113,6 +113,12 @@ def mappings(
 
 
 def x_mappings(object_prefixes: Tuple[str], names: bool = False):
+    """
+    Map all ontologies with UMLS as the common link.
+
+    :param object_prefixes: Prefixes of ontologies of interest.
+    :param names: Get names from UMLS True/False, defaults to False
+    """
     if not UMLS_SSSOM_TSV.exists():
         df = pyobo.get_sssom_df("umls", names=names)
         df.to_csv(UMLS_SSSOM_TSV, sep="\t", index=False)

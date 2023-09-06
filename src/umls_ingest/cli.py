@@ -6,7 +6,7 @@ import click
 
 from umls_ingest import __version__
 from umls_ingest.constants import MAPPINGS_FILE
-from umls_ingest.main import download, mappings
+from umls_ingest.main import download, mappings, x_mappings
 
 __all__ = [
     "main",
@@ -57,6 +57,15 @@ def get_mappings(resource: str, names: bool, subject_prefixes: Tuple[str], objec
         names=names,
         subject_prefixes=subject_prefixes,
         object_prefixes=object_prefixes,
+    )
+
+@main.command("get-x-mappings")
+@click.option("--object-prefixes", help="Prefix of subject CURIEs.", multiple=True)
+@click.option("--names", help="Get labels for CURIEs.", default=False)
+def get_x_mappings(object_prefixes: Tuple[str], names: bool):
+    """Get non-umls mappings."""
+    x_mappings(
+        object_prefixes=object_prefixes, names=names
     )
 
 

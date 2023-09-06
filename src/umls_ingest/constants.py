@@ -9,6 +9,7 @@ UMLS_VERSION = "2023AA"
 UMLS_SUFFIX = "umls/kss/{version}/umls-{version}-metathesaurus-level-0.zip"
 UMLS_URL = BASE_URL + UMLS_SUFFIX
 
+
 # https://download.nlm.nih.gov/umls/kss/2023AA/umls-2023AA-metathesaurus-level-0.zip
 # RX_VERSION = "RxNorm_weekly_10052022"
 # RX_SUFFIX = f"umls/kss/rxnorm/RxNorm_weekly_{RX_VERSION}&apiKey="
@@ -18,6 +19,8 @@ UMLS_URL = BASE_URL + UMLS_SUFFIX
 PACKAGE_DIR = Path(__file__).resolve().parent
 DATA_DIR = PACKAGE_DIR / "data"
 MAPPINGS_DIR = PACKAGE_DIR / "mappings"
+MAPPINGS_FILE = "sssom.tsv"
+UMLS_SSSOM_TSV = MAPPINGS_DIR / MAPPINGS_FILE
 
 SUBJECT_ID = "subject_id"
 OBJECT_ID = "object_id"

@@ -13,6 +13,8 @@ from umls_ingest.constants import (
     API_KEY,
     DATA_DIR,
     MAPPINGS_DIR,
+    MAPPINGS_FILE,
+    UMLS_SSSOM_TSV,
     MRCONSO_COLUMN_HEADERS,
     MRMAP_COLUMN_NAMES,
     OBJECT_ID,
@@ -74,7 +76,7 @@ def mappings(
     names: bool,
     subject_prefixes: Tuple[str],
     object_prefixes: Tuple[str],
-    output_file: str,
+    output_file: str = MAPPINGS_FILE,
 ):
     """
     Map to other ontologies.
@@ -82,10 +84,11 @@ def mappings(
     Mapping diagram:
         https://www.nlm.nih.gov/research/umls/implementation_resources/query_diagrams/er9.html
     """
-    df = pyobo.get_sssom_df(resource, names=names)
-    if not output_file:
-        output_file = "sssom.tsv"
-    df.to_csv(MAPPINGS_DIR / output_file, sep="\t", index=False)
+    if not UMLS_SSSOM_TSV.exists():
+        df = pyobo.get_sssom_df(resource, names=names)
+        df.to_csv(UMLS_SSSOM_TSV, sep="\t", index=False)
+    else:
+        df = pd.read_csv(UMLS_SSSOM_TSV, sep="\t", low_memory=False)
 
     if subject_prefixes:
         df_subject_subset = df[df[SUBJECT_ID].apply(lambda x: any(x.startswith(prefix) for prefix in subject_prefixes))]

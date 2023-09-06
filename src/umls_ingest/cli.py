@@ -5,6 +5,7 @@ from typing import Tuple
 import click
 
 from umls_ingest import __version__
+from umls_ingest.constants import MAPPINGS_FILE
 from umls_ingest.main import download, mappings
 
 __all__ = [
@@ -47,7 +48,7 @@ def get_tsv(umls_version: str):
 @click.option("--names", help="Get labels for CURIEs.", default=False)
 @click.option("--subject-prefixes", help="Prefix of subject CURIEs.", multiple=True)
 @click.option("--object-prefixes", help="Prefix of object CURIEs.", multiple=True)
-@click.option("--output", help="Output file name.")
+@click.option("--output", help="Output file name.", default=MAPPINGS_FILE)
 def get_mappings(resource: str, names: bool, subject_prefixes: Tuple[str], object_prefixes: Tuple[str], output: str):
     """Run mappings."""
     mappings(

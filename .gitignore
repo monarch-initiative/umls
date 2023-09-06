@@ -164,3 +164,4 @@ src/umls_ingest/data/*.tsv
 *.tsv
 !src/umls_ingest/mappings/umls_hp.sssom.tsv
 !src/umls_ingest/mappings/umls_mesh.sssom.tsv
+!src/umls_ingest/mappings/umls_mesh_hp.sssom.tsv

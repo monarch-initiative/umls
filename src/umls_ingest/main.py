@@ -5,7 +5,7 @@ from datetime import date
 from pathlib import Path
 from typing import Optional, Tuple
 from zipfile import ZipFile
-
+from curies import get_obo_converter
 import pandas as pd
 import pyobo
 from umls_downloader import download_tgt_versioned
@@ -72,6 +72,16 @@ def _open_file_from_zip(path: Path, fn: str):
             yield file
 
 
+def import_umls_via_pyobo(resource: str,names: bool):
+    obo_converter = get_obo_converter()
+    df = pyobo.get_sssom_df(resource, names=names)
+    df["object_id"] = df["object_id"].apply(
+        lambda x: ":".join(x.split(":")[-2:]) if str(x).count(":") > 1 else x
+    )
+    obo_converter.pd_standardize_curie(df, column=1)
+    df.to_csv(UMLS_SSSOM_TSV, sep="\t", index=False)
+
+
 def mappings(
     resource: str,
     names: bool,
@@ -86,16 +96,15 @@ def mappings(
         https://www.nlm.nih.gov/research/umls/implementation_resources/query_diagrams/er9.html
     """
     if not UMLS_SSSOM_TSV.exists():
-        df = pyobo.get_sssom_df(resource, names=names)
-        df.to_csv(UMLS_SSSOM_TSV, sep="\t", index=False)
+        import_umls_via_pyobo(resource=resource, names=names)
     else:
         df = pd.read_csv(UMLS_SSSOM_TSV, sep="\t", low_memory=False)
 
     if subject_prefixes:
-        df_subject_subset = df[df[SUBJECT_ID].apply(lambda x: any(x.startswith(prefix) for prefix in subject_prefixes))]
+        df_subject_subset = df[df[SUBJECT_ID].apply(lambda x: any(x.startswith((prefix.lower(), prefix.upper())) for prefix in subject_prefixes))]
         new_outfile = MAPPINGS_DIR.joinpath("_".join(subject_prefixes) + "." + output_file)
     if object_prefixes:
-        df_object_subset = df[df[OBJECT_ID].apply(lambda x: any(x.startswith(prefix) for prefix in object_prefixes))]
+        df_object_subset = df[df[OBJECT_ID].apply(lambda x: any(x.startswith((prefix.lower(), prefix.upper())) for prefix in object_prefixes))]
         new_outfile = MAPPINGS_DIR.joinpath("_".join(object_prefixes) + "." + output_file)
     if subject_prefixes and object_prefixes:
         common_rows = pd.merge(df_subject_subset, df_object_subset, how="inner")
@@ -120,15 +129,14 @@ def x_mappings(object_prefixes: Tuple[str], names: bool = False):
     :param names: Get names from UMLS True/False, defaults to False
     """
     if not UMLS_SSSOM_TSV.exists():
-        df = pyobo.get_sssom_df("umls", names=names)
-        df.to_csv(UMLS_SSSOM_TSV, sep="\t", index=False)
+        import_umls_via_pyobo(resource="umls", names=names)
     else:
         df = pd.read_csv(UMLS_SSSOM_TSV, sep="\t", low_memory=False)
 
     # For each prefix in object_prefixes create dynamic variables - prefix_df
     prefix_dfs = {}
     for prefix in object_prefixes:
-        prefix_dfs[prefix] = df[df["object_id"].str.startswith(prefix)]
+        prefix_dfs[prefix] = df[df["object_id"].str.startswith((prefix.lower(), prefix.upper()))]
 
     # Perform inner join of all dynamic variables with the key subject_id
     result_df = None

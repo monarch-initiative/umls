@@ -8,6 +8,7 @@ from zipfile import ZipFile
 
 import pandas as pd
 import pyobo
+
 # from curies import get_obo_converter, get_bioregistry_converter
 from umls_downloader import download_tgt_versioned
 

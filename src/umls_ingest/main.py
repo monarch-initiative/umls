@@ -8,7 +8,7 @@ from zipfile import ZipFile
 
 import pandas as pd
 import pyobo
-from curies import get_obo_converter
+# from curies import get_obo_converter, get_bioregistry_converter
 from umls_downloader import download_tgt_versioned
 
 from umls_ingest.constants import (
@@ -73,12 +73,15 @@ def _open_file_from_zip(path: Path, fn: str):
             yield file
 
 
-def _import_umls_via_pyobo(resource: str, names: bool):
-    obo_converter = get_obo_converter()
+def _import_umls_via_pyobo(resource: str, names: bool) -> pd.DataFrame:
+    # obo_converter = get_obo_converter()
+    # bioregistry_converter = get_bioregistry_converter()
     df = pyobo.get_sssom_df(resource, names=names)
-    df["object_id"] = df["object_id"].apply(lambda x: ":".join(x.split(":")[-2:]) if str(x).count(":") > 1 else x)
-    obo_converter.pd_standardize_curie(df, column="object_id")
+    df[OBJECT_ID] = df[OBJECT_ID].apply(lambda x: ":".join(x.split(":")[-2:]) if x.count(":") > 1 else x)
+    # obo_converter.pd_standardize_curie(df, column="object_id")
+    # df[OBJECT_ID] = df[OBJECT_ID].apply(lambda x: obo_converter.standardize_curie(x))
     df.to_csv(UMLS_SSSOM_TSV, sep="\t", index=False)
+    return df
 
 
 def mappings(
@@ -95,7 +98,7 @@ def mappings(
         https://www.nlm.nih.gov/research/umls/implementation_resources/query_diagrams/er9.html
     """
     if not UMLS_SSSOM_TSV.exists():
-        _import_umls_via_pyobo(resource=resource, names=names)
+        df = _import_umls_via_pyobo(resource=resource, names=names)
     else:
         df = pd.read_csv(UMLS_SSSOM_TSV, sep="\t", low_memory=False)
 
@@ -136,7 +139,7 @@ def x_mappings(object_prefixes: Tuple[str], names: bool = False):
     :param names: Get names from UMLS True/False, defaults to False
     """
     if not UMLS_SSSOM_TSV.exists():
-        _import_umls_via_pyobo(resource="umls", names=names)
+        df = _import_umls_via_pyobo(resource="umls", names=names)
     else:
         df = pd.read_csv(UMLS_SSSOM_TSV, sep="\t", low_memory=False)
 

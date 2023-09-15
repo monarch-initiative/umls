@@ -214,13 +214,13 @@ tests = ["coverage", "pytest"]
 
 [[package]]
 name = "bioregistry"
-version = "0.10.18"
+version = "0.10.35"
 description = "Integrated registry of biological databases and nomenclatures"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "bioregistry-0.10.18-py3-none-any.whl", hash = "sha256:ece594ededd107758c38d7b3292c90661a4bfc75c18a3ae7cf37112ff25c044b"},
-    {file = "bioregistry-0.10.18.tar.gz", hash = "sha256:cf5f2829784d01a3aee3307a1b8c4c6cedc3d9a7817701dd8857dca84b69b24a"},
+    {file = "bioregistry-0.10.35-py3-none-any.whl", hash = "sha256:8e2d040c852a6e993eeadda48b0408ab31896ce23971cafd77cb83807824a223"},
+    {file = "bioregistry-0.10.35.tar.gz", hash = "sha256:ded3e891a8723c754952c17f327bbf893b125c08768ddc81c7159d0b19699ea1"},
 ]
 
 [package.dependencies]
@@ -2395,18 +2395,18 @@ plugins = ["importlib-metadata"]
 
 [[package]]
 name = "pyobo"
-version = "0.10.1"
+version = "0.10.2"
 description = "Handling and writing OBO"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "pyobo-0.10.1-py3-none-any.whl", hash = "sha256:b725283df99b48241d9859fa4dd5a26ceaf877aaa8183bb39d6f6fff8ebc80e8"},
-    {file = "pyobo-0.10.1.tar.gz", hash = "sha256:39d4013c83d1a335f3eb206fc43e7ceec82f05424b1907fd38b6a35db406c0f6"},
+    {file = "pyobo-0.10.2-py3-none-any.whl", hash = "sha256:40193eab6ff683370f38324a7f390d9c9e61ceef6be2599e8086cfad3e6c5b31"},
+    {file = "pyobo-0.10.2.tar.gz", hash = "sha256:a48d0651d4964e306b01a7ba6f305e46dbbed9c3838f57c4a79805c5b718fea7"},
 ]
 
 [package.dependencies]
 bioontologies = ">=0.4.0"
-bioregistry = ">=0.10.0"
+bioregistry = ">=0.10.20"
 bioversions = ">=0.5.202"
 cachier = "*"
 chembl-downloader = "*"
@@ -3614,4 +3614,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9"
-content-hash = "58671a9e8aeb9ed31bc83cfaeee69da075806b316e585c44ebd9324c510fefd1"
+content-hash = "73d683e65767d9248024d5d27f58d8a1505d6ff4833295792ceeed7e47ff4d67"

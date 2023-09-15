@@ -9,7 +9,7 @@ from zipfile import ZipFile
 import pandas as pd
 import pyobo
 
-# from curies import get_obo_converter, get_bioregistry_converter
+from curies import get_obo_converter, get_bioregistry_converter
 from umls_downloader import download_tgt_versioned
 
 from umls_ingest.constants import (
@@ -75,12 +75,12 @@ def _open_file_from_zip(path: Path, fn: str):
 
 
 def _import_umls_via_pyobo(resource: str, names: bool) -> pd.DataFrame:
-    # obo_converter = get_obo_converter()
+    obo_converter = get_obo_converter()
     # bioregistry_converter = get_bioregistry_converter()
     df = pyobo.get_sssom_df(resource, names=names)
-    df[OBJECT_ID] = df[OBJECT_ID].apply(lambda x: ":".join(x.split(":")[-2:]) if x.count(":") > 1 else x)
-    # obo_converter.pd_standardize_curie(df, column="object_id")
-    # df[OBJECT_ID] = df[OBJECT_ID].apply(lambda x: obo_converter.standardize_curie(x))
+    # In case of ba:na:na
+    # df[OBJECT_ID] = df[OBJECT_ID].apply(lambda x: ":".join(x.split(":")[-2:]) if x.count(":") > 1 else x)
+    obo_converter.pd_standardize_curie(df, column=OBJECT_ID)
     df.to_csv(UMLS_SSSOM_TSV, sep="\t", index=False)
     return df
 

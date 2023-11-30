@@ -94,10 +94,12 @@ def _import_umls_via_pyobo(resource: str, names: bool) -> pd.DataFrame:
     df.to_csv(UMLS_SSSOM_TSV, sep="\t", index=False)
     return df
 
-def _make_mapping_set_from_df(df:pd.DataFrame) -> MappingSetDataFrame:
+
+def _make_mapping_set_from_df(df: pd.DataFrame) -> MappingSetDataFrame:
     msdf = MappingSetDataFrame(df=df, converter=CONVERTER)
     msdf.clean_prefix_map(strict=False)
     return msdf
+
 
 def mappings(
     resource: str,
@@ -176,7 +178,7 @@ def x_mappings(object_prefixes: Tuple[str], names: bool = False):
         if result_df is None or result_df.empty:
             result_df = prefix_df
         else:
-            result_df = pd.merge(result_df, prefix_df, on=SUBJECT_ID, how="inner", suffixes=('_x', '_y'))
+            result_df = pd.merge(result_df, prefix_df, on=SUBJECT_ID, how="inner", suffixes=("_x", "_y"))
 
     # Rename columns
     # Define the old and new column names

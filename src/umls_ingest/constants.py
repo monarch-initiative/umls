@@ -26,6 +26,9 @@ SUBJECT_ID = "subject_id"
 OBJECT_ID = "object_id"
 PREDICATE_ID = "predicate_id"
 MAPPING_JUSTIFICATION = "mapping_justification"
+MATCH_STRING = "match_string"
+MAPPING_TOOL = "mapping_tool"
+MAPPING_DATE = "mapping_date"
 
 MRCONSO_COLUMN_HEADERS = [
     "CUI",  # Unique identifier for concept
